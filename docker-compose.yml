@@ -1,0 +1,99 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: backend
+    ports:
+      - "5050:5050"
+    volumes:
+      - ./backend:/app  
+    command: uvicorn main:app --host 0.0.0.0 --port 5050 --reload
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=gameuser
+      - MYSQL_PASSWORD=gamepassword
+      - MYSQL_DATABASE=gametracker
+      - MONGO_URI=mongodb://mongodb:27017/gametracker
+      - NEO4J_URI=bolt://neo4j:7687
+    depends_on:
+      - mysql
+      - mongodb
+      - neo4j
+    networks:
+      - game-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: frontend-dev
+    ports:
+      - "3535:3535"
+    volumes:
+      - ./frontend:/app  # Mount frontend directory
+      - /app/node_modules # Anonymous volume for node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true  # Add this for better hot reload in Docker
+      - NODE_ENV=development
+    command: npm run dev
+    networks:
+      - game-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=gameuser
+      - PMA_PASSWORD=gamepassword
+    depends_on:
+      - mysql
+    networks:
+      - game-network
+  mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=gametracker
+      - MYSQL_USER=gameuser
+      - MYSQL_PASSWORD=gamepassword
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - game-network
+
+  mongodb:
+    image: mongo:6
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - game-network
+
+  neo4j:
+    image: neo4j:5
+    environment:
+      - NEO4J_AUTH=neo4j/secretpassword
+    volumes:
+      - neo4j_data:/data
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    networks:
+      - game-network
+
+networks:
+  game-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  mongo_data:
+  neo4j_data:

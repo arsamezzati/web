@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+pymongo
+neo4j
+pymysql
+python-dotenv
+cryptography
+bcrypt
+sqlalchemy
+requests
