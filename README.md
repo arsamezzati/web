@@ -17,7 +17,6 @@ GameTracker is a modern web application that helps gamers track their gaming pro
 - **Vue.js 3**: Latest version with Composition API
 - **Pinia**: State management
 - **Vue Router**: Client-side routing
-- **Tailwind CSS**: Utility-first CSS framework
 - **Font Awesome**: Icon library
 - **Axios**: HTTP client
 
