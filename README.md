@@ -94,9 +94,7 @@ uvicorn main:app --reload
 
 ## 📚 API Documentation
 
-The API documentation is available at:
-- Swagger UI: http://localhost:5050/docs
-- ReDoc: http://localhost:5050/redoc
+**soon**
 
 ## 🔐 Security
 
