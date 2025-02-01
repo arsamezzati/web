@@ -41,7 +41,7 @@
             <div class="member-icon">
               <i class="fas fa-user"></i>
             </div>
-            <h3>John Doe</h3>
+            <h3>Arsam Ezzati</h3>
             <p>Founder & Developer</p>
           </div>
   
@@ -49,7 +49,7 @@
             <div class="member-icon">
               <i class="fas fa-user"></i>
             </div>
-            <h3>Jane Smith</h3>
+            <h3>Jim Barton</h3>
             <p>Lead Designer</p>
           </div>
   

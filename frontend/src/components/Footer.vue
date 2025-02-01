@@ -3,7 +3,6 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
-        <!-- Why Choose Us -->
         <div class="footer-section">
           <h2>Why Choose Us</h2>
           <ul class="feature-list">
@@ -13,7 +12,7 @@
           </ul>
         </div>
 
-        <!-- Quick Links -->
+        <!--  Links -->
         <div class="footer-section">
           <h2>Quick Links</h2>
           <ul class="link-list">

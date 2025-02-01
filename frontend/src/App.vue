@@ -1,4 +1,3 @@
-// App.vue
 <template>
   <div class="app-container">
     <Navbar />

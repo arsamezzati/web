@@ -1,4 +1,3 @@
-// views/NotFound.vue
 <template>
   <div class="not-found">
     <i class="fas fa-exclamation-triangle"></i>

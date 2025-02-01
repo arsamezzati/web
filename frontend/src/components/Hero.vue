@@ -108,7 +108,6 @@
     background: #2563eb;
   }
   
-  /* Responsive Design */
   @media (max-width: 768px) {
     .card-grid {
       flex-direction: column;

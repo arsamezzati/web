@@ -1,7 +1,5 @@
-// index.js (router configuration)
 import { createRouter, createWebHistory } from 'vue-router'
 
-// Import views
 import Home from '../views/home.vue'
 import About from '../views/About.vue'
 import NotFound from '../views/NotFound.vue'
@@ -15,15 +13,15 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',  // Changed from '/' to '/about'
+    path: '/about',  
     name: 'About',
     component: About
   },
-  // NotFound should always be last
+  
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
-    component: NotFound  // Using direct import since we already imported it
+    component: NotFound  
   },
   {
     path: '/games',

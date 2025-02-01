@@ -79,7 +79,6 @@ async function handleSubmit() {
       router.push('/profile')
     }
   } else {
-    // Handle signup
   }
 }
 </script>

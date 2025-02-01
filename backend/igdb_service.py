@@ -5,7 +5,7 @@ from fastapi import HTTPException
 
 class IGDBService:
     def __init__(self):
-        # Load credentials from JSON file
+       
         try:
             with open('details.json', 'r') as f:
                 credentials = json.load(f)
@@ -86,5 +86,5 @@ class IGDBService:
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Failed to get popular games: {str(e)}")
 
-# Create single instance
+
 igdb_service = IGDBService()

@@ -152,7 +152,7 @@
 
     const endpoint = isLogin.value ? '/api/login' : '/api/register'
     
-    // Format the payload
+    
     const payload = isLogin.value ? {
       email: formData.email,
       password: formData.password
@@ -161,10 +161,10 @@
       password: formData.password,
       name: formData.name.trim(),
       surname: formData.surname.trim(),
-      birthdate: formData.birthdate  // Should be in YYYY-MM-DD format
+      birthdate: formData.birthdate  
     }
 
-    console.log('Sending payload:', payload)  // Debug log
+    console.log('Sending payload:', payload)  
 
     const response = await fetch(`http://localhost:5050${endpoint}`, {
       method: 'POST',
@@ -176,18 +176,18 @@
 
     if (!response.ok) {
       const errorData = await response.json()
-      console.error('Server response:', errorData)  // Debug log
+      console.error('Server response:', errorData)  
       throw new Error(errorData.detail || 'Authentication failed')
     }
 
     const userData = await response.json()
-    console.log('Received user data:', userData)  // Debug log
+    console.log('Received user data:', userData) 
     authStore.setUser(userData)
     closeModal()
     router.push('/profile')
 
   } catch (e) {
-    console.error('Error:', e)  // Debug log
+    console.error('Error:', e) 
     error.value = e.message
   } finally {
     loading.value = false

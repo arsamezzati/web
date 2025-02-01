@@ -12,7 +12,7 @@ from mongo import mongo_service
 from pydantic import BaseModel
 
 
-# Set up logging
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -35,7 +35,7 @@ class UserRegister(BaseModel):
     surname: str 
     email: str
     password: str 
-    birthdate: str  # Changed to str to handle date format from frontend
+    birthdate: str  
 @app.post("/api/login")
 async def login(user: UserLogin):
     logger.info(f"Login attempt for email: {user.email}")
@@ -59,10 +59,10 @@ async def login(user: UserLogin):
                 if not bcrypt.checkpw(provided_password, stored_password):
                     raise HTTPException(status_code=401, detail="Invalid email or password")
                     
-                # Remove password from response
+                # removing the password from response for security purposes
                 user_data.pop('password')
                 
-                # Convert date to string for JSON serialization
+                # date to string
                 if 'birthdate' in user_data:
                     user_data['birthdate'] = user_data['birthdate'].isoformat()
                 
@@ -76,11 +76,11 @@ async def login(user: UserLogin):
 
 @app.post("/api/register")
 async def register(user: UserRegister):
-    # Log received data
+    # Logging received data
     logger.info(f"Received registration data: {jsonable_encoder(user)}")
     
     try:
-        # Convert birthdate string to date object
+        
         birth_date = date.fromisoformat(user.birthdate)
         
         with get_db() as db:
@@ -93,7 +93,7 @@ async def register(user: UserRegister):
                 # Hash password
                 hashed_password = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt())
                 
-                # Create new user
+                
                 cursor.execute(
                     """INSERT INTO users (name, surname, email, birthdate, password) 
                        VALUES (%s, %s, %s, %s, %s)""",
@@ -103,7 +103,7 @@ async def register(user: UserRegister):
                 
                 new_user_id = cursor.lastrowid
                 
-                # Fetch the created user
+                
                 cursor.execute(
                     """SELECT uid, name, surname, email, birthdate 
                        FROM users WHERE uid = %s""",

@@ -85,7 +85,6 @@
   </div>
 </div>
 
-<!-- Add a comment toggle button -->
 <button @click="toggleComments(game.id)" class="comment-toggle">
   <i class="fas fa-comments"></i>
   Comments
@@ -137,7 +136,6 @@
 
   const toggleLike = async (game) => {
     if (!authStore.isAuthenticated) {
-      // You might want to trigger login modal here
       return
     }
 
@@ -239,7 +237,6 @@ const submitComment = async (gameId) => {
 
     if (!response.ok) throw new Error('Failed to post comment')
     
-    // Clear the input and refresh comments
     newComment.value = ''
     await fetchComments(gameId)
   } catch (e) {
